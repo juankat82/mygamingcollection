@@ -1,0 +1,118 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "adfa8a3fe2b24da99b0b64c0de312e20",
+    "entities": [
+      {
+        "tableName": "items",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`googleBDId` TEXT NOT NULL, `itemId` TEXT NOT NULL, `itemName` TEXT NOT NULL, `itemModel` TEXT NOT NULL, `itemType` TEXT NOT NULL, `itemBrand` TEXT NOT NULL, `itemCompleteness` TEXT NOT NULL, `itemRegion` TEXT NOT NULL, `itemModded` TEXT NOT NULL, `itemPrice` TEXT NOT NULL, `itemPriceCurrency` TEXT NOT NULL, `itemYear` TEXT NOT NULL, `pictureGame` TEXT NOT NULL, `pictureBackBox` TEXT NOT NULL, `pictureFrontBox` TEXT NOT NULL, PRIMARY KEY(`googleBDId`))",
+        "fields": [
+          {
+            "fieldPath": "googleDBId",
+            "columnName": "googleBDId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemId",
+            "columnName": "itemId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemName",
+            "columnName": "itemName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemModel",
+            "columnName": "itemModel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemType",
+            "columnName": "itemType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemBrand",
+            "columnName": "itemBrand",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemCompleteness",
+            "columnName": "itemCompleteness",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemRegion",
+            "columnName": "itemRegion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemModded",
+            "columnName": "itemModded",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemPrice",
+            "columnName": "itemPrice",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemPriceCurrency",
+            "columnName": "itemPriceCurrency",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemYear",
+            "columnName": "itemYear",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pictureGame",
+            "columnName": "pictureGame",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pictureBackBox",
+            "columnName": "pictureBackBox",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pictureFrontBox",
+            "columnName": "pictureFrontBox",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "googleBDId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'adfa8a3fe2b24da99b0b64c0de312e20')"
+    ]
+  }
+}
