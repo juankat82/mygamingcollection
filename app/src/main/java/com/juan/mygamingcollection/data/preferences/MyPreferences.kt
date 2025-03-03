@@ -31,7 +31,7 @@ class MyPreferences {
         return isGoogleLogin
     }
 
-    /*suspend */fun setIsGoogleLogin(isGoogleLogin: Boolean) : Boolean{
+    fun setIsGoogleLogin(isGoogleLogin: Boolean) : Boolean{
         GlobalScope.launch {
             myContext?.dataStore?.edit { preferences ->
                 preferences[PreferencesKeys.googleLogin] = isGoogleLogin
@@ -40,7 +40,7 @@ class MyPreferences {
         return true
     }
 
-    /*suspend */fun setCurrentUserEmail(currentUserEmail: String) : Boolean {
+    fun setCurrentUserEmail(currentUserEmail: String) : Boolean {
         GlobalScope.launch {
             myContext?.dataStore?.edit { preferences ->
                 preferences[PreferencesKeys.currentUserEmail] = currentUserEmail

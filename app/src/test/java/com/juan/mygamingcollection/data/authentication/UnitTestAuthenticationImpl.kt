@@ -80,8 +80,8 @@ class UnitTestAuthenticationImpl {
         val userName = "user"
         val userPassword = "password_1"
         val successTask = object : Task<AuthResult>() {
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
-            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
+            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {   }
+            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> {   }
             override fun addOnFailureListener(p0: Executor, p1: OnFailureListener): Task<AuthResult> {TODO()}
             override fun getException(): Exception? {return Exception("") }
             override fun getResult(): AuthResult { TODO() }
@@ -107,7 +107,7 @@ class UnitTestAuthenticationImpl {
     @Test
     fun `test register New User`() {
         val successTask = object : Task<AuthResult>() {
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
+            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {   }
             override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
             override fun addOnFailureListener(p0: Executor, p1: OnFailureListener): Task<AuthResult> {TODO()}
             override fun getException(): Exception {return Exception("") }

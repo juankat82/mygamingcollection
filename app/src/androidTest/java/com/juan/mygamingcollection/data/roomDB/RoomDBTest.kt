@@ -56,7 +56,6 @@ class RoomDBTest {
         mockkObject(MyPreferences.shared)
         roomDatabase = spyk<ItemsRoomDB>(Room.databaseBuilder(context,ItemsRoomDB::class.java, "items").fallbackToDestructiveMigration().build())
         roomDatabaseRAM = Room.inMemoryDatabaseBuilder(context,ItemsRoomDB::class.java).allowMainThreadQueries().build()
-
     }
 
     ///TESTS METHODS GETS CALLED./////
