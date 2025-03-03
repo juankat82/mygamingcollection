@@ -5,28 +5,21 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.juan.mygamingcollection.data.authentication.AuthenticationImpl
 import com.juan.mygamingcollection.data.preferences.MyPreferences
-import com.juan.mygamingcollection.data.viewmodel.ScreenViewModel
-import com.juan.mygamingcollection.data.viewmodel.UserViewModel
 import com.juan.mygamingcollection.model.Item
 import io.mockk.coEvery
-import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.spyk
-import io.mockk.verify
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.CountDownLatch
 import kotlin.collections.listOf
 
 @RunWith(AndroidJUnit4::class)
@@ -38,9 +31,22 @@ class RoomDBTest {
     var context = InstrumentationRegistry.getInstrumentation().context
     lateinit var roomDatabase: ItemsRoomDB
     lateinit var roomDatabaseRAM: ItemsRoomDB
-
-    val itemList = listOf<Item>(
+    val latch = CountDownLatch(1)
+    val testItem = Item("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
+    val modifiedTestItem = Item("1","7","7","7","7","7","7","7","7","7","7","7","7","7","7")
+    val testItemList = listOf<Item>(
         Item("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"),
+        Item("2","1","1","1","1","1","1","1","1","1","1","1","1","1","1"),
+        Item("3","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
+    )
+
+    val updatedItemList = listOf<Item>(
+        Item("1","7","7","7","7","7","7","7","7","7","7","7","7","7","7"),
+        Item("2","1","1","1","1","1","1","1","1","1","1","1","1","1","1"),
+        Item("3","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
+    )
+
+    val testItemListUpdated = listOf<Item>(
         Item("2","1","1","1","1","1","1","1","1","1","1","1","1","1","1"),
         Item("3","1","1","1","1","1","1","1","1","1","1","1","1","1","1")
     )
@@ -56,9 +62,9 @@ class RoomDBTest {
     ///TESTS METHODS GETS CALLED./////
     @Test
     fun `test get all items gets called`() {
-        coEvery { roomDatabase.itemsDAO().getAllItems() } returns listOf<Item>(Item("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"))
-        assertEquals(listOf(Item("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")), listOf<Item>(Item("1","1","1","1","1","1","1","1","1","1","1","1","1","1","1")))
-        runTest() {
+        coEvery { roomDatabase.itemsDAO().getAllItems() } returns listOf<Item>(testItem)
+        assertEquals(listOf(testItem), listOf<Item>(testItem))
+        runTest {
             roomDatabase.itemsDAO().getAllItems()
         }
     }
@@ -71,7 +77,6 @@ class RoomDBTest {
             roomDatabase.itemsDAO().insertItem(item)
         }
         coVerify{ roomDatabase.itemsDAO().insertItem(item) }
-
     }
 
     @Test
@@ -114,7 +119,114 @@ class RoomDBTest {
     }
     ////////////////////////////////////
     /////TEST DATABASE DOES UPDATE DATA WHEN WE CALL ITS METHODS/////
+    //https://medium.com/@wambuinjumbi/unit-testing-in-android-room-361bf56b69c5
+    //I DONT TEST "getAllItems()" as I continuously do it in all methods
+    @Test
+    fun `test insert items DB`() {
 
+        runTest{
+            roomDatabaseRAM.itemsDAO().insertItem(testItem)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result.get(0), testItem)
+            Log.i("RESULTIS: ",result.get(0).toString())
+            latch.countDown()
+        }
+        latch.await()
+    }
+
+    @Test
+    fun `test insert itemList DBd`() {
+        runTest{
+            roomDatabaseRAM.itemsDAO().insertItemList(testItemList)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, testItemList)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        latch.await()
+    }
+
+    @Test
+    fun `test delete testItem DB`() {
+        runTest{
+            roomDatabaseRAM.itemsDAO().insertItemList(testItemList)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, testItemList)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        runTest{
+            roomDatabaseRAM.itemsDAO().deleteItem(testItem)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, testItemListUpdated)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        latch.await()
+    }
+
+    @Test
+    fun `test update item DB`() {
+        runTest{
+            roomDatabaseRAM.itemsDAO().insertItemList(testItemList)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, testItemList)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        runTest{
+            roomDatabaseRAM.itemsDAO().updateItem(modifiedTestItem)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, updatedItemList)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        latch.await()
+    }
+
+    @Test
+    fun `test delete all items DB`() {
+        runTest{
+            roomDatabaseRAM.itemsDAO().insertItemList(testItemList)
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, testItemList)
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        runTest{
+            roomDatabaseRAM.itemsDAO().deleteAll()
+            latch.countDown()
+        }
+        runTest{
+            val result = roomDatabaseRAM.itemsDAO().getAllItems()
+            assertEquals(result, listOf<Item>())
+            Log.i("RESULTIS: ",result.toString())
+            latch.countDown()
+        }
+        latch.await()
+    }
+    /////////////////////////////////////////////////
     @After
     fun closeDatabase() {
         roomDatabase.close()

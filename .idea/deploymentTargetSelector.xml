@@ -13,19 +13,19 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="test insert items()">
+      <SelectionState runConfigName="test delete all items dets called()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test insert itemList()">
+      <SelectionState runConfigName="test insert items DB()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test delete itemList()">
+      <SelectionState runConfigName="test insert itemList DBd()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="RoomDBTest">
+      <SelectionState runConfigName="test delete all items DB()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test update item()">
+      <SelectionState runConfigName="test delete testItem DB()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
