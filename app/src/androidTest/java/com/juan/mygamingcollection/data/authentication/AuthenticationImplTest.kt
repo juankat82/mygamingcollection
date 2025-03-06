@@ -1,3 +1,11 @@
+/*
+* This file contains a single test over one of the methods of the class
+* AuthenticationImpl,kt. The rest of the tests are in the same base folder than
+* this class, that is androidTest, in the class viewmodel/UserViewModelTest.kt.
+* The reason is the other tests are related to this UserViewModelTest.kt so
+* its easier to have them there. This file contains the tests for the remaining
+* methods that arent used in UserViewModer.kt (production package).
+*/
 package com.juan.mygamingcollection.data.authentication
 
 import android.util.Log
@@ -23,6 +31,7 @@ class AuthenticationImplTest {
     lateinit var auth: FirebaseAuth
     var user:FirebaseUser? = null
     val userEmail = "myemailR01_@gmail.com"
+
     @Before
     fun setup() {
         mockkObject(MyPreferences.shared)

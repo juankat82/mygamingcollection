@@ -1,7 +1,6 @@
 package com.juan.mygamingcollection.data.firebaseDB
 
 import android.content.Context
-import androidx.compose.foundation.lazy.LazyListState
 import com.juan.mygamingcollection.data.viewmodel.ItemsViewModel
 import com.juan.mygamingcollection.data.viewmodel.ScreenViewModel
 import com.juan.mygamingcollection.data.viewmodel.UserViewModel
@@ -22,8 +21,8 @@ interface FirebaseDBConnect {
     fun writeNewRegistry(
         newItem: Item,
         context: Context,
-        userViewModel: UserViewModel,
-        lazyListState: LazyListState
+        userViewModel: UserViewModel//,
+//        lazyListState: LazyListState
     )
 
     fun onUpdateRegistry(item: Item, context: Context)

@@ -262,7 +262,7 @@ fun AddNewItem(
                                 }
                                 else {
                                     itemsViewModel.setSingleItem(item)
-                                    firebaseDBConnect.writeNewRegistry(item, context, userViewModel, lazyListState)
+                                    firebaseDBConnect.writeNewRegistry(item, context, userViewModel)
                                     firebaseDBConnect.hasBeenSent.observe(
                                         (context as MainActivity),
                                         object : Observer<Int> {
@@ -307,7 +307,7 @@ fun AddNewItem(
                     Button(onClick = {
                         showPriceEqualsZeroDialog = false
                         itemsViewModel.setSingleItem(item)
-                        firebaseDBConnect.writeNewRegistry(item, context, userViewModel, lazyListState)
+                        firebaseDBConnect.writeNewRegistry(item, context, userViewModel)//, lazyListState)
                         firebaseDBConnect.hasBeenSent.observe(
                             (context as MainActivity),
                             object : Observer<Int> {

@@ -13,19 +13,19 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="test delete all items DB()">
+      <SelectionState runConfigName="test erase one registry()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test delete testItem DB()">
+      <SelectionState runConfigName="test erase full remote database()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test update item DB()">
+      <SelectionState runConfigName="test upload file()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test get all items gets called()">
+      <SelectionState runConfigName="test search item in remote database()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="test check if user is logged in()">
+      <SelectionState runConfigName="test read all registries using firebaseDB()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

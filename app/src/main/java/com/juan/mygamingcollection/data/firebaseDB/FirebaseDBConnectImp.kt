@@ -1,8 +1,8 @@
 package com.juan.mygamingcollection.data.firebaseDB
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
@@ -39,6 +39,7 @@ class FirebaseDBConnectImpl(roomDatabase: ItemsRoomDB, itemsViewModel: ItemsView
     val itemListViewModel = itemsViewModel
     var storage: FirebaseStorage = FirebaseStorage.getInstance()
     val storageReference =storage.reference
+    var errorCodeFileUpload = arrayOf(0,0,0)
 
     init {
         createConnection()
@@ -80,8 +81,9 @@ class FirebaseDBConnectImpl(roomDatabase: ItemsRoomDB, itemsViewModel: ItemsView
                 }
 
                 GlobalScope.launch {
+                    Log.i("ISROOMDBNULL: ", list.toString())
                     itemDataBase.itemsDAO().deleteAll()
-                    itemDataBase.itemsDAO().insertItemList(list)
+                    itemDataBase.itemsDAO().insertItemList(list).also { Log.i("CALLEDCOROUTINE: ", "EXECUTED") }
                     val job = GlobalScope.launch(Dispatchers.Main) {
                         try {
                             itemsViewModel.setItemListViewModel(list)
@@ -105,8 +107,7 @@ class FirebaseDBConnectImpl(roomDatabase: ItemsRoomDB, itemsViewModel: ItemsView
     override fun writeNewRegistry(
         newItem: Item,
         context: Context,
-        userViewModel: UserViewModel,
-        lazyListState: LazyListState
+        userViewModel: UserViewModel
     ) {
         var roomNewItem: Item
         val query = db.getReference("users").child(userName).child("items").push().setValue(newItem)
@@ -210,18 +211,21 @@ class FirebaseDBConnectImpl(roomDatabase: ItemsRoomDB, itemsViewModel: ItemsView
         }
     }
 
-    fun uploadFile(fileList: List<File?>, context: Context) {
+    fun uploadFile(fileList: List<File?>, context: Context) : Array<Int>{
         fileList.forEachIndexed { i, file ->
             if (file != null) {
                     storageReference.child("images/" + file.name.lowercase()).putFile(file.toUri())
                         .addOnCompleteListener {
                             it.addOnSuccessListener {
+                                errorCodeFileUpload[i] = 1
                                 Toast.makeText(context, "Image $i upload Succeed!", Toast.LENGTH_SHORT).show()
                             }.addOnFailureListener {
+                                errorCodeFileUpload[i] = -1
                                 Toast.makeText(context, "Image $i Upload Failed!", Toast.LENGTH_SHORT).show()
                             }
                     }
             }
         }
+        return errorCodeFileUpload
      }
 }
