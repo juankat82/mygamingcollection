@@ -1,1 +1,0 @@
-firebaseDB connection from package "firebaseDB"
