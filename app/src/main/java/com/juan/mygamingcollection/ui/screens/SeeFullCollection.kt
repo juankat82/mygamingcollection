@@ -204,24 +204,24 @@ fun SeeFullCollection(userViewModel: UserViewModel, context: Context, itemsViewM
                                 isCollectionLoading = true
                                 firebaseDBConnectImpl.syncOnlineItems(itemsViewModel, context, screenViewModel)
                             }) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.update_item_list),
-                                    contentDescription = "update item list",
-                                    modifier = Modifier.height(20.dp).width(20.dp)
-                                )
-                                Spacer(Modifier.height(5.dp))
-                                Text(
-                                    stringResource(id = R.string.synchronize_database),
-                                    style = TextStyle(fontWeight = FontWeight.Bold),
-                                    textAlign = TextAlign.Center,
-                                    fontSize = 10.sp,
-                                    color = Color.Black
-                                )
-                            }
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.update_item_list),
+                                            contentDescription = "update item list",
+                                            modifier = Modifier.height(20.dp).width(20.dp)
+                                        )
+                                        Spacer(Modifier.height(5.dp))
+                                        Text(
+                                            stringResource(id = R.string.synchronize_database),
+                                            style = TextStyle(fontWeight = FontWeight.Bold),
+                                            textAlign = TextAlign.Center,
+                                            fontSize = 10.sp,
+                                            color = Color.Black
+                                        )
+                                    }
                         }
             }
 
@@ -257,40 +257,36 @@ fun SeeFullCollection(userViewModel: UserViewModel, context: Context, itemsViewM
                         }
                     })
                }
-        else {
-            Surface(modifier = Modifier
-                .clickable {
-                    focusManager.clearFocus()
-                    keyboardController?.hide()
-                }
-                .background(backgroundColor)
-                .fillMaxSize()
-                .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 80.dp),
-                shape = RoundedCornerShape(10.dp),
-                border = BorderStroke(2.dp, Color.LightGray),
-                shadowElevation = 5.dp,
-                tonalElevation = 5.dp,
-                content = {
-                    LaunchedEffect(null) {
-                        while (timeLeft > 0) {
-                            delay(100L)
-                            timeLeft--
-                        }
-                        if (timeLeft == 0)
-                            isCollectionLoading = false
+            else {
+                Surface(modifier = Modifier.clickable {
+                        focusManager.clearFocus()
+                        keyboardController?.hide()
                     }
+                    .background(backgroundColor)
+                    .fillMaxSize()
+                    .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 80.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    border = BorderStroke(2.dp, Color.LightGray),
+                    shadowElevation = 5.dp,
+                    tonalElevation = 5.dp,
+                    content = {
+                        LaunchedEffect(null) {
+                            while (timeLeft > 0) {
+                                delay(100L)
+                                timeLeft--
+                            }
+                            if (timeLeft == 0)
+                                isCollectionLoading = false
+                        }
                     firebaseDBConnectImpl.readAllRegistries(itemsViewModel)
-
                     itemsViewModel.itemsList.observe(context, object : Observer<List<Item>> {
                             override fun onChanged(value: List<Item>) {
                                 itemList.value = value
                             }
-                        })
+                    })
 
                     if (isCollectionLoading) {
-                        Column(
-                            modifier = Modifier.fillMaxSize().padding(horizontal = 50.dp)
-                        ) {
+                        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 50.dp)) {
                             CircularProgressIndicator(
                                 modifier = Modifier
                                     .width(200.dp)
@@ -315,22 +311,18 @@ fun SeeFullCollection(userViewModel: UserViewModel, context: Context, itemsViewM
                         LazyColumn(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(
-                                    colorResource(id = R.color.clear_purple_juan)
-                                )
-                        ) {
-                            items(count = itemList.value.size, itemContent = { index ->
-                                ItemCollection(
-                                    context,
-                                    itemList.value.get(index),
-                                    firebaseDBConnectImpl
-                                )
-                            })
+                                .background(colorResource(id = R.color.clear_purple_juan))) {
+                                    items(count = itemList.value.size, itemContent = { index ->
+                                        ItemCollection(
+                                            context,
+                                            itemList.value.get(index),
+                                            firebaseDBConnectImpl)
+                                    })
+                                }
                         }
-                    }
-                })
+                    })
+                }
         }
-    }
 
     if (showExitDialog) {
         AlertDialog(
@@ -712,8 +704,7 @@ private fun ItemCollection(
                   .weight(0.7f)
                   .padding(top = 8.dp, start = 8.dp, end = 8.dp, bottom = 5.dp), expanded = openTrigger, onExpandedChange = {openTrigger = it}) {
                   TextField(
-                      modifier = Modifier
-                          .menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true),
+                      modifier = Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true),
                       value = if (datePicked.isEmpty())  item.itemYear else datePicked,
                       onValueChange = {},
                       readOnly = true,
@@ -729,10 +720,10 @@ private fun ItemCollection(
                                   datePicked = item.toString()
                                   openTrigger = false },
                               contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding)
-                      }
-                  }
-              }
-        }
+                        }
+                    }
+                }
+            }
             ///////////////IMAGES////////////////////
             val lazyRowState = rememberLazyListState()
             LazyRow (modifier = Modifier

@@ -301,7 +301,6 @@ fun showNameChangeDialog(context: Context) {
                 newRepeatPasswordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance())
             }
         }
-
     })
 
     cancelButton.setOnClickListener {

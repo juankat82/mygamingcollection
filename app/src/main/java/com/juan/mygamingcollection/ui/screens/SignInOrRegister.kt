@@ -3,7 +3,6 @@ package com.juan.mygamingcollection.ui.screens
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.credentials.GetCredentialRequest
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -57,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.PasswordCredential
 import androidx.credentials.PublicKeyCredential
@@ -102,7 +102,6 @@ fun SignInOrRegister(
     ////////////////////////////////////////////////////
     //True==login mode, False==register mode
     val isLoginModeOrRegisterMode = rememberSaveable { mutableStateOf(true) }
-
     keyboardController = LocalSoftwareKeyboardController.current!!
     val shouldShowExitDialog = rememberSaveable{mutableStateOf(false)}
     if (shouldShowExitDialog.value)
@@ -270,12 +269,9 @@ private fun LoginScreen(
         if (isUserNameErrorTextHidden.value == 0 && isUserPasswordErrorTextHidden.value ==0) {
             userViewModel.loginUser(navHostController.context, userName.value, userPassword.value, screenViewModel)
         }
-    }, modifier = Modifier.padding(vertical = 4.dp)) {
-        Text(text = stringResource(id = R.string.login))
-    }
+    }, modifier = Modifier.padding(vertical = 4.dp)) { Text(text = stringResource(id = R.string.login)) }
 
     ElevatedButton(
-
         colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black),
         modifier = Modifier
             .fillMaxWidth()
@@ -341,7 +337,6 @@ private fun handleSignIn(
         }
         is CustomCredential -> {
             if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
-
                 // Use googleIdTokenCredential and extract id to validate and
                 // authenticate on your server.
                 try {
@@ -418,8 +413,7 @@ fun RegisterScreen(
             if (isPasswordVisible.value)
                 visualTransformationOpen
             else
-                visualTransformationHidden
-        ,
+                visualTransformationHidden,
         onValueChange = { if (it.length<50) userPassword.value = it },
         shape = RoundedCornerShape(topStart = 3.dp, bottomStart = 3.dp),
         label = { Text(text = stringResource(id = R.string.new_user_password), color = Color.Black) },
@@ -462,8 +456,7 @@ fun RegisterScreen(
         onValueChange = { if (it.length<27) newPasswordRepeat.value = it },
         shape = RoundedCornerShape(topStart = 3.dp, bottomStart = 3.dp),
         label = { Text(text = stringResource(id = R.string.new_user_repeat_password), color = Color.Black) },
-        trailingIcon = {
-        }
+        trailingIcon = {}
     )
     Text(text = when (isNewUserPasswordErrorTextHidden.value) {
         0,1,2-> ""
@@ -531,14 +524,14 @@ private fun ExitAlertDialog(
         onDismissRequest = {  shouldShowDialog.value = false },
         confirmButton = {
             TextButton(onClick = {
-                if (isLoginModeOrRegister.value) {
-                    (context as MainActivity).finish()
+                    if (isLoginModeOrRegister.value) {
+                        (context as MainActivity).finish()
+                    }
+                    else {
+                        isLoginModeOrRegister.value = true
+                    }
                 }
-                else {
-                    isLoginModeOrRegister.value = true
-                }
-            })
-            { Text(text = stringResource(id = android.R.string.ok)) }
+            ) { Text(text = stringResource(id = android.R.string.ok)) }
         },
         dismissButton = {
             TextButton(onClick = { shouldShowDialog.value = false})

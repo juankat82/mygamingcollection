@@ -1,9 +1,6 @@
 package com.juan.mygamingcollection.ui.screens
 
-import android.content.Context
 import androidx.annotation.DrawableRes
-import androidx.compose.ui.res.stringResource
-import com.juan.mygamingcollection.MainActivity
 import com.juan.mygamingcollection.R
 
 sealed class Screens(val title: String, val route: String) {

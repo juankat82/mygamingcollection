@@ -1,3 +1,7 @@
+/*
+*Tests are performed using the guide at:
+* https://medium.com/@wambuinjumbi/unit-testing-in-android-room-361bf56b69c5
+*/
 package com.juan.mygamingcollection.data.roomDB
 
 import android.util.Log
@@ -118,8 +122,6 @@ class RoomDBTest {
     }
     ////////////////////////////////////
     /////TEST DATABASE DOES UPDATE DATA WHEN WE CALL ITS METHODS/////
-    //https://medium.com/@wambuinjumbi/unit-testing-in-android-room-361bf56b69c5
-    //I DONT TEST "getAllItems()" as I continuously do it in all methods
     @Test
     fun `test insert items DB`() {
 

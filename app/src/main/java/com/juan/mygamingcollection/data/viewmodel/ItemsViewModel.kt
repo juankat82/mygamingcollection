@@ -45,7 +45,6 @@ class ItemsViewModel : ViewModel() {
             GlobalScope.launch (Dispatchers.Main){
                 _itemsViewModel.value = newList
             }
-
             Toast.makeText(context, "Item successfully removed", Toast.LENGTH_SHORT).show()
         }
     }

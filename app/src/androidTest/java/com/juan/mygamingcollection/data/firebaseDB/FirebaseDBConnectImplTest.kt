@@ -175,10 +175,8 @@ class FirebaseDBConnectImplTest {
         roomDatabaseRAM.itemsDAO().deleteAll()
         itemsViewModel.setItemListViewModel(listOf())
         listAddedNew = roomDatabaseRAM.itemsDAO().getAllItems()
-
         Log.i("COMPARATION LISTS: ",listAdded.toString() + "\n" + listAddedNew)
         Assert.assertNotEquals(listAdded, listAddedNew)
-
     }
     @Test
     fun `test search item in remote database`() = runTest {

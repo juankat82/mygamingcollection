@@ -1,13 +1,6 @@
 package com.juan.mygamingcollection.data.authentication
 
 import android.app.Activity
-import android.content.Context
-import android.os.Looper
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -16,8 +9,6 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.ktx.Firebase
-import com.juan.mygamingcollection.MainActivity
 import com.juan.mygamingcollection.data.preferences.MyPreferences
 import com.juan.mygamingcollection.data.viewmodel.UserViewModel
 import io.mockk.coEvery
@@ -28,27 +19,19 @@ import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.contains
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.any
-import org.mockito.kotlin.anyOrNull
 import java.lang.Exception
 import java.util.concurrent.Executor
 
@@ -64,7 +47,6 @@ class UnitTestAuthenticationImpl {
     @Before
     fun init() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-
     }
 
     @Test
@@ -80,8 +62,8 @@ class UnitTestAuthenticationImpl {
         val userName = "user"
         val userPassword = "password_1"
         val successTask = object : Task<AuthResult>() {
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {   }
-            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> {   }
+            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> { TODO() }
+            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> {  TODO() }
             override fun addOnFailureListener(p0: Executor, p1: OnFailureListener): Task<AuthResult> {TODO()}
             override fun getException(): Exception? {return Exception("") }
             override fun getResult(): AuthResult { TODO() }
@@ -97,7 +79,6 @@ class UnitTestAuthenticationImpl {
                 return successTask
             }
         }
-
         every { auth.signInWithEmailAndPassword(userName, userPassword).isSuccessful} returns true
         val result = auth.signInWithEmailAndPassword(userName, userPassword).isSuccessful
         System.out.println("IS SUCCESSFUL>: "+ (result == successTask.isSuccessful))
@@ -107,8 +88,8 @@ class UnitTestAuthenticationImpl {
     @Test
     fun `test register New User`() {
         val successTask = object : Task<AuthResult>() {
-            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {   }
-            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
+            override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> {  TODO() }
+            override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> { TODO() }
             override fun addOnFailureListener(p0: Executor, p1: OnFailureListener): Task<AuthResult> {TODO()}
             override fun getException(): Exception {return Exception("") }
             override fun getResult(): AuthResult { TODO() }
@@ -176,8 +157,9 @@ class UnitTestAuthenticationImpl {
         Assert.assertEquals(result, true)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @After
-    open fun afterEach() {
+    fun afterEach() {
         Dispatchers.resetMain()
     }
 }

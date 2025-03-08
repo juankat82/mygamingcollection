@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.juan.mygamingcollection.ui.screens.Screens
 import com.juan.mygamingcollection.ui.screens.otherScreens
 import com.juan.mygamingcollection.ui.screens.screensInBottom
-import javax.inject.Inject
 
 class ScreenViewModel : ViewModel() {
 

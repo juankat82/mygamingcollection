@@ -1,38 +1,25 @@
 package com.juan.mygamingcollection.data.viewmodel
 
-import com.juan.mygamingcollection.data.viewmodel.*
 import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
-import androidx.lifecycle.ViewModelProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
-import com.google.common.base.Joiner.on
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.juan.mygamingcollection.R
 import com.juan.mygamingcollection.data.authentication.AuthenticationImpl
 import com.juan.mygamingcollection.data.preferences.MyPreferences
-import io.mockk.MockK
 import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
 import io.mockk.mockkObject
-import io.mockk.runs
 import io.mockk.spyk
 import io.mockk.verify
-import io.mockk.verifyCount
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -40,9 +27,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.*
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
 @RunWith(AndroidJUnit4::class)
 class UserViewModelTest {

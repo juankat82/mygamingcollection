@@ -119,7 +119,6 @@ class MainActivity : ComponentActivity() {
         var isGoogleTokenLogin by rememberSaveable { mutableStateOf(false) }
         showExitDialog = rememberSaveable { mutableStateOf(false) }
 
-
         BackHandler {
             if (drawerState.isOpen)
                 scope.launch { drawerState.close() }
@@ -150,7 +149,6 @@ class MainActivity : ComponentActivity() {
                             drawerEnabled.value = false
                             screenViewModel.setScreen(3)
                             navHostController.navigate(Screens.OtherScreens.LoginOrRegisterScreen.bRoute)
-
                         }
                     }
                 })
@@ -208,12 +206,10 @@ class MainActivity : ComponentActivity() {
                         (context as MainActivity).finish()
                         val intent = Intent(context, MainActivity::class.java)
                         ContextCompat.startActivity(context, intent, null)
-                    }) {
-                    Text(text = stringResource(id = R.string.restart_app))
+                    }) { Text(text = stringResource(id = R.string.restart_app)) }
                 }
             }
         }
-    }
 
     @Composable
     fun ShowExitDialog(context: Context) {
@@ -221,36 +217,23 @@ class MainActivity : ComponentActivity() {
         if (isOpenExitDialog) {
             AlertDialog(
                 modifier = Modifier,
-                title = {
-                    Text(text = stringResource(id = R.string.leave_title))
-                },
-                text = {
-                    Text(text = stringResource(id = R.string.would_you_leave))
-                },
+                title = { Text(text = stringResource(id = R.string.leave_title)) },
+                text = { Text(text = stringResource(id = R.string.would_you_leave)) },
                 shape = RectangleShape,
                 containerColor = backgroundColor,
-                onDismissRequest = {
-                    isOpenExitDialog = false
-                },
+                onDismissRequest = { isOpenExitDialog = false },
                 confirmButton = {
                     Button(onClick = {
                         isOpenExitDialog = false
                         (context as MainActivity).finish()
-                    }
-                    ) {
-                        Text(stringResource(android.R.string.ok))
-                    }
+                    }) { Text(stringResource(android.R.string.ok)) }
                 },
                 dismissButton = {
-                    Button(onClick = {
-                        isOpenExitDialog = false
-                    }) {
+                    Button(onClick = { isOpenExitDialog = false }) {
                         Text(stringResource(android.R.string.cancel))
                     }
                 },
-                icon = {
-                    Icon(painterResource(id = R.drawable.logout_icon), "exit_icon")
-                }
+                icon = { Icon(painterResource(id = R.drawable.logout_icon), "exit_icon") }
             )
         }
     }
@@ -306,7 +289,8 @@ class MainActivity : ComponentActivity() {
                                                 screenViewModel.setDrawerOpen(drawerState)
                                             }
                                         }
-                                    })
+                                    }
+                                )
                             }
                         }
                     },

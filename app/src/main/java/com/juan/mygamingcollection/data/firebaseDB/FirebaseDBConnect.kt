@@ -21,8 +21,7 @@ interface FirebaseDBConnect {
     fun writeNewRegistry(
         newItem: Item,
         context: Context,
-        userViewModel: UserViewModel//,
-//        lazyListState: LazyListState
+        userViewModel: UserViewModel
     )
 
     fun onUpdateRegistry(item: Item, context: Context)

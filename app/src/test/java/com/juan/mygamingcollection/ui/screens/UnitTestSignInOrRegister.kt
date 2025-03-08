@@ -18,7 +18,6 @@ class UnitTestSignInOrRegister {
         val emailN = "myemail" //DOESNT PASS
         val emailY = "itsmyemal21@gmail.com" //PASS
         Assert.assertTrue(EmailValidator.getInstance().isValid(emailY))
-
     }
 
     @Test

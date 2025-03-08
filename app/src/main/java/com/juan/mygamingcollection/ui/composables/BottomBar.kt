@@ -116,7 +116,6 @@ fun BottomBarItem(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         IconButton( onClick = {
             //defines buttons color
             when(index) {
