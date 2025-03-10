@@ -1,5 +1,5 @@
 <resources>
-    <string name="fileprovider">com.juan.mygamingcollection.components.fileprovider</string>
+    <string name="fileprovider">com.yourname.yourappname.components.fileprovider</string>
     <string name="app_name">MyGamingCollection</string>
     <string name="app_name_separated">My Gaming Collection</string>
     <string name="see_full_collection">See collection</string>
@@ -32,7 +32,7 @@
     <string name="no_network_available_for_images">Images not loaded. Connect and restart app.</string>
     <string name="authentication_failed">Authentication Failed.</string>
     <string name="registration_failed">Registration Failed.</string>
-    <string name="servers_client_id">120915935901-hph0kd14v3pbammcs4urb0ctifuucqsj.apps.googleusercontent.com</string>
+    <string name="servers_client_id">Your own google server user id xxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com</string>
     <string name="authentication_succeed">Authenticated!</string>
     <string name="email_reset_text">Check emails for instructions to change password</string>
     <string name="we_sent_email">We have sent you an email.</string>

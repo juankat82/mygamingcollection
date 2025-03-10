@@ -34,7 +34,6 @@ import com.juan.mygamingcollection.data.viewmodel.ScreenViewModel
 import com.juan.mygamingcollection.data.viewmodel.UserViewModel
 import com.juan.mygamingcollection.ui.theme.MyGamingCollectionTheme
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -62,7 +61,6 @@ class UITestSignInOrRegister {
     lateinit var drawerState: DrawerState
     lateinit var roomDatabase: ItemsRoomDB
     val testScheduler = TestCoroutineScheduler()
-    val testDispatcher = StandardTestDispatcher(testScheduler)
     val myIdlingResource = CountingIdlingResource("Count")
     @Before
     fun initialize() {
@@ -105,8 +103,8 @@ class UITestSignInOrRegister {
         androidComposeTestRule.onNodeWithText(context.getString(R.string.sign_in)).assertTextEquals("Sign In")
         androidComposeTestRule.onNodeWithText(context.getString(R.string.register_a)).assertExists()
         androidComposeTestRule.onNodeWithText(context.getString(R.string.register_b)).assertExists()
-        androidComposeTestRule.onNodeWithText(context.getString(R.string.user_email)).performTextInput("iorix98@hotmail.com")
-        androidComposeTestRule.onNodeWithText(context.getString(R.string.user_password)).performTextInput("Contrasena_1")
+        androidComposeTestRule.onNodeWithText(context.getString(R.string.user_email)).performTextInput("myemailaddress@emailserver.xxx")
+        androidComposeTestRule.onNodeWithText(context.getString(R.string.user_password)).performTextInput("MyPassword_007")
         Thread.sleep(1000)
         androidComposeTestRule.onNodeWithText(context.getString(R.string.login)).performClick()
         Thread.sleep(1000)
@@ -124,9 +122,9 @@ class UITestSignInOrRegister {
         androidComposeTestRule.onNodeWithText(context.getString(R.string.register_b)).assertExists()
         Thread.sleep(1000)
         androidComposeTestRule.onNodeWithText(context.getString(R.string.register_b)).performClick()
-        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_email)).performTextInput("spanishflytwitter82@gmail.com")
-        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_password)).performTextInput("Contrasena_12")
-        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_repeat_password)).performTextInput("Contrasena_12")
+        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_email)).performTextInput("myemailaddress@emailserver.xxx")
+        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_password)).performTextInput("MyPassword_007")
+        androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_repeat_password)).performTextInput("MyPassword_007")
         Thread.sleep(1000L)
         androidComposeTestRule.onNodeWithText(context.getString(R.string.new_user_register)).performClick()
         Thread.sleep(1000)
@@ -140,7 +138,7 @@ class UITestSignInOrRegister {
             MyGamingCollectionTheme { androidComposeTestRule.activity.MainScreen() }
         }
 
-        androidComposeTestRule.onNodeWithTag("login_button").assertExists().performClick()//.printToLog("MYLOG")
+        androidComposeTestRule.onNodeWithTag("login_button").assertExists().performClick()
         val IODispatcher = UnconfinedTestDispatcher()
         runTest(IODispatcher) {
             IODispatcher.scheduler.advanceUntilIdle()

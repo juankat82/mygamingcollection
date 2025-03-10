@@ -133,8 +133,8 @@ class UnitTestAuthenticationImpl {
 
     @Test
     fun `verify registerNewUser`() {
-        val userName = "iorix98@hotmail.com"
-        val userPassword = "Contrasena_1"
+        val userName = "a valid username"
+        val userPassword = "a valid password"
         val successTask = object : Task<AuthResult>() {
             override fun addOnFailureListener(p0: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }
             override fun addOnFailureListener(p0: Activity, p1: OnFailureListener): Task<AuthResult> { TODO("Not yet implemented") }

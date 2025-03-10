@@ -65,7 +65,7 @@ import com.juan.mygamingcollection.logic.InternetChecker
 import com.juan.mygamingcollection.model.Item
 import kotlinx.coroutines.launch
 
-const val BASE_STORAGE_ADDRESS = "https://storage.googleapis.com/tour-guide-app-677c8.appspot.com"
+const val BASE_STORAGE_ADDRESS = "base storage address"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -341,7 +341,6 @@ fun AddNewItem(
                     Icon(painterResource(id = R.drawable.warning_icon), "exit_icon")
                 }
             )
-
         }
     })
 

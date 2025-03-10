@@ -79,7 +79,7 @@ class UserViewModelTest {
     fun `test login with credentials`() {
 
         val signInWithGoogleOptionButton =
-            GetSignInWithGoogleOption.Builder("120915935901-hph0kd14v3pbammcs4urb0ctifuucqsj.apps.googleusercontent.com")
+            GetSignInWithGoogleOption.Builder("Credentials from google authentication")
                 .build()
         val request: GetCredentialRequest = GetCredentialRequest.Builder().addCredentialOption(signInWithGoogleOptionButton).build()
         var credential: Credential

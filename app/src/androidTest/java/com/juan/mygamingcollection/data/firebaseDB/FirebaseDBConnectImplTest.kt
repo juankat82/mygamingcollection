@@ -83,7 +83,7 @@ class FirebaseDBConnectImplTest {
         runTest{ user = MyPreferences.shared.getCurrentUserEmail() }
         roomDatabaseRAM = spyk(Room.inMemoryDatabaseBuilder(context,ItemsRoomDB::class.java).allowMainThreadQueries().build())
         dao = roomDatabaseRAM.itemsDAO()
-        db = spyk(Firebase.database("https://tour-guide-app-677c8-default-rtdb.europe-west1.firebasedatabase.app/"))
+        db = spyk(Firebase.database("firebase realtime database url"))
         firebaseDBConnectImpl = spyk(FirebaseDBConnectImpl(roomDatabaseRAM, itemsViewModel))
     }
 

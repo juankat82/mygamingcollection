@@ -55,7 +55,7 @@ class FirebaseDBConnectImpl(roomDatabase: ItemsRoomDB, itemsViewModel: ItemsView
     val userName = Firebase.auth.currentUser?.email?.split("@")?.get(0) ?: user
 
     override fun createConnection() {
-        db = Firebase.database("https://tour-guide-app-677c8-default-rtdb.europe-west1.firebasedatabase.app/")
+        db = Firebase.database("firebase database uri")
     }
 
     override fun readAllRegistries(itemsViewModel: ItemsViewModel) {
